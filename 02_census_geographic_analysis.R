@@ -1,3 +1,10 @@
+
+###########################################################################################################
+### PROGRAM NAME: 02_Census Geographic Analysis  (Run Package 01 first)                                 ###
+### DESCRIPTION:  Simple maps and data exploration of NYC IPUMS cut                                     ###
+### DATE:         6/26/2025                                                                             ###
+###########################################################################################################
+
 #run package 01 first
 
 #load necessary packages
@@ -6,11 +13,7 @@ library(tidycensus)
 library(tigris)
 library(tmap)
 
-#local settings
-options(scipen=999)
-
 #data exploration
-
 nyc_pums %>% count(wt = PWGTP) #raw estimate of total New Yorkers, a slight overestimate
 
 nyc_pums %>% filter(race_ethnicity != "Mixed or Other") %>%
@@ -34,8 +37,6 @@ slice_max(hisp_map_data, order_by = ARB_above_30, n = 5)
 #3 Morris Heights & Mount Hope (BX)
 #4 Bensonhurst & Bath Beach (BK)
 #5 Morrisania, Tremont, Belmont, & West Farms (BX)
-
-library(tmap)
 
 joined_pumas <- nyc_pumas %>%
   left_join(hisp_map_data, by = c("PUMACE20" = "PUMA"))
